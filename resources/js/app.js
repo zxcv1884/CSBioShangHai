@@ -6,36 +6,14 @@ import ReactDOM from "react-dom";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Second from "./components/Second";
-
+import '.././css/custom.css';
 export default class App extends Component {
     render() {
         return (
             <BrowserRouter>
-                <div>
-                    {/*<div className="container">*/}
-                    {/*    <ul>*/}
-                    {/*        <li>*/}
-                    {/*            <NavLink*/}
-                    {/*                exact*/}
-                    {/*                activeClassName="selected"*/}
-                    {/*                to="/"*/}
-                    {/*            >*/}
-                    {/*                home*/}
-                    {/*            </NavLink>*/}
-                    {/*        </li>*/}
-                    {/*        <li>*/}
-                    {/*            <NavLink*/}
-                    {/*                activeClassName="selected"*/}
-                    {/*                to="/second"*/}
-                    {/*            >*/}
-                    {/*                second*/}
-                    {/*            </NavLink>*/}
-                    {/*        </li>*/}
-                    {/*    </ul>*/}
-                    {/*</div>*/}
-                    <Route exact path="/" component={Header}></Route>
+                    <Header/>
+                    <Route exact path="/" component={Home}></Route>
                     <Route path="/second" component={Second}></Route>
-                </div>
             </BrowserRouter>
         );
     }

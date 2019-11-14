@@ -1,0 +1,61 @@
+.nav-a{
+    display: inline-block !important;
+    height: 100%;
+    line-height: 50px;
+    text: center !important;
+
+}
+.stripe {
+    width: 200px;
+    height: 5px;
+    background: blue;
+    position: absolute;
+    bottom: 0;
+    transition:  0.5s;
+    pointer-events: none;
+}
+.container{
+    padding-top: 66px;
+}
+.collapse{
+    z-index: 3;
+}
+.nav-item:hover ul{
+    z-index: 2;
+    display: block;
+    margin-top: 0;
+    /*animation-name: menu1;*/
+    /*animation-duration: 600ms;*/
+    /*animation-timing-function: ease-in;*/
+    /*animation-fill-mode: forwards;*/
+}
+/*.dropdown:hover > .dropdown-menu a{*/
+/*    z-index: 2;*/
+/*    animation-name: menu2;*/
+/*    animation-duration: 600ms ;*/
+/*    animation-timing-function: ease-in;*/
+/*    animation-fill-mode: forwards;*/
+/*}*/
+/*@keyframes menu1 {*/
+/*    0% {Height: 0}*/
+/*    100%{Height: 300px}*/
+/*}*/
+/*@keyframes menu2 {*/
+/*    0% {Height: 0}*/
+/*    100%{Height: 300px}*/
+/*}*/
+.dropdown-menu {
+    position: absolute !important;
+    left: 0 !important;
+    z-index: 2;
+    border-radius: 0 !important;
+    border: 0 !important;
+    background: #F2F2F2 !important;
+}
+
+.dropdown-menu a {
+    z-index: 2;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+}
