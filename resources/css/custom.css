@@ -1,8 +1,14 @@
+.favicon{
+    margin-left: 10%;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
 .nav-a{
     display: inline-block !important;
     height: 100%;
     line-height: 50px;
     text: center !important;
+    transition:  400ms;
 
 }
 .stripe {
@@ -20,30 +26,27 @@
 .collapse{
     z-index: 3;
 }
-.nav-item:hover ul{
+.LoadContent {
+    opacity: 0;
+    z-index: 2;
+    display: block ;
+    margin-top: 0 !important;
+}
+.nav-item:hover .animation{
     z-index: 2;
     display: block;
     margin-top: 0;
-    /*animation-name: menu1;*/
-    /*animation-duration: 600ms;*/
-    /*animation-timing-function: ease-in;*/
-    /*animation-fill-mode: forwards;*/
+    opacity: 100%;
+    animation-name: menu1;
+    animation-duration: 200ms;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+    pointer-events: auto;
 }
-/*.dropdown:hover > .dropdown-menu a{*/
-/*    z-index: 2;*/
-/*    animation-name: menu2;*/
-/*    animation-duration: 600ms ;*/
-/*    animation-timing-function: ease-in;*/
-/*    animation-fill-mode: forwards;*/
-/*}*/
-/*@keyframes menu1 {*/
-/*    0% {Height: 0}*/
-/*    100%{Height: 300px}*/
-/*}*/
-/*@keyframes menu2 {*/
-/*    0% {Height: 0}*/
-/*    100%{Height: 300px}*/
-/*}*/
+@keyframes menu1 {
+    0% {opacity: 0}
+    100%{opacity: 100%}
+}
 .dropdown-menu {
     position: absolute !important;
     left: 0 !important;
@@ -58,4 +61,42 @@
     color: black;
     padding: 12px 16px;
     text-decoration: none;
+}
+@media screen and (max-width: 1320px){
+    .navbar-nav{
+        /*display: none !important;*/
+        /*padding-top: 0;*/
+        /*padding-bottom: 0;*/
+        /*width: 40px;*/
+        height: 45px;
+        transition:  0.4s;
+        opacity: 0;
+    }
+    .favicon{
+        margin-left: 3%;
+    }
+}
+@media screen and (max-width: 1215px){
+    .navbar-nav {
+        display: none !important;
+    }
+}
+
+.search{
+    min-width: 236px;
+    min-height: 45px;
+}
+.searchTextBox{
+    max-width: 180px;
+    max-height: 37px;
+}
+.line{
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.user{
+    padding-right: 1rem;
+}
+.rightBar{
+    max-height: 45px;
 }
