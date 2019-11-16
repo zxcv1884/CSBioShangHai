@@ -48,7 +48,8 @@ export default class Header extends Component {
             left: 550,
             width:0,
             linkStyle:"nav-a font-weight-bolder nav-link py-3",
-            navStyle:"favicon navbar-brand py-3"
+            navStyle:"favicon navbar-brand py-3",
+            hamburgerStyle:"hamburger py-4"
         }
     };
     componentDidMount() {
@@ -56,20 +57,24 @@ export default class Header extends Component {
         window.addEventListener("resize", this.handleResize);
     }
     handleResize = ()=>{
-        this.setState({
-            left: this.state.activeElement.getBoundingClientRect().left,
-        })
+        if(this.state.activeElement !== null) {
+            this.setState({
+                left: this.state.activeElement.getBoundingClientRect().left,
+            })
+        }
     };
     handleScroll  = () => {
-        if(window.scrollY<200){
+        if(window.scrollY<100){
             this.setState({
                 linkStyle:"nav-a font-weight-bolder nav-link py-3",
-                navStyle:"favicon navbar-brand py-3"
+                navStyle:"favicon py-3",
+                hamburgerStyle:"hamburger py-4"
             })
         }else{
             this.setState({
                 linkStyle:"nav-a font-weight-bolder nav-link",
-                navStyle:"favicon navbar-brand "
+                navStyle:"favicon",
+                hamburgerStyle:"hamburger py-3"
             })
         }
     };
@@ -109,6 +114,9 @@ export default class Header extends Component {
         return (
             <header className="headerBar fixed-top bg-white" onLoad={this.handleResize}>
                 <nav className="navbar navbar-light  navbar-expand-lg " style={headerStyle}>
+                    <div className={this.state.hamburgerStyle} >
+                        <img src="assets/img/Hamburger.png" width="30" height="30" className="d-inline-block align-top" alt="" />
+                    </div>
                     <a className={this.state.navStyle} href="/">
                         <img src="assets/img/favicon.png" width="50" height="50" className="d-inline-block align-top" alt="" />
                     </a>
@@ -119,8 +127,11 @@ export default class Header extends Component {
                                 <li className="nav-item  text  position-static"  key={pages.id}  onMouseEnter={this.handleMouseEnter} onClick={this.handleMouseClick} onMouseLeave={this.handleMouseLeave} >
                                     <Link className={this.state.linkStyle} id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false" to={pages.link}  >{pages.text}</Link>
                                     <ul className="LoadContent animation dropdown-menu vw-100 " >
-                                        <div className="container dropdown-content">
-                                            <h3>{pages.text}</h3>
+                                        <div className="form-inline">
+                                            <div className="dropdownContentTitle dropdown-content ">
+                                                <Link  to={pages.link} >{pages.text}</Link>
+                                            </div>
+
                                         </div>
                                     </ul>
                                 </li>
@@ -135,9 +146,6 @@ export default class Header extends Component {
                                 <img src="assets/img/header/searchicon.png" width="30" height="30" className="d-inline-block align-top" alt="" />
                             </button>
                         </form>
-                        <div className="hamburger " >
-                            <img src="assets/img/Hamburger.png" width="30" height="30" className="d-inline-block align-top" alt="" />
-                        </div>
                         <div className="line " >
                             <img src="assets/img/Line.jpg" width="2" height="30" className="d-inline-block align-top" alt="" />
                         </div>

@@ -79,21 +79,36 @@
         padding-left: 0.5rem !important;
         padding-right: 0.5rem !important;
     }
+    .dropdownContentTitle{
+        padding-left: 14% !important;
+        width: 300px !important;
+    }
 }
 @media screen and (max-width: 1118px){
+    .favicon{
+        position: absolute;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        margin-left:0;
+        left: 46% !important;
+    }
+    .line{
+        display: none;
+    }
     .hamburger{
+        padding-left: 1rem;
         display: block;
-        transition:  0.4s;
+        transition:  400ms;
         opacity: 100%;
     }
     .navbar-nav{
         height: 45px;
-        transition:  0.4s;
+        transition:  400ms;
         opacity: 0;
     }
     .search{
         height: 45px;
-        transition:  0.4s;
+        transition:  300ms;
         opacity: 0;
     }
 }
@@ -123,4 +138,16 @@
 }
 .rightBar{
     max-height: 45px;
+}
+.headerSpace{
+    height: 78px;
+    width: 100%;
+}
+.dropdownContentTitle{
+    padding-left: 19%;
+    font-size: x-large;
+    padding-top: 30px;
+    position: static;
+    height: 300px;
+    width: 500px;
 }

@@ -6,12 +6,13 @@ import ReactDOM from "react-dom";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Second from "./components/Second";
-import '.././css/custom.css';
+import '../css/header.css';
 export default class App extends Component {
     render() {
         return (
             <BrowserRouter>
                     <Header/>
+                    <div className="headerSpace"/>
                     <Route exact path="/" component={Home}></Route>
                     <Route path="/second" component={Second}></Route>
             </BrowserRouter>
