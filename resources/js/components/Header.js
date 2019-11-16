@@ -43,38 +43,33 @@ export default class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            activeElement:null,
             activeLeft:550,
-            activeWidth: 0,
             left: 550,
             width:0,
-            windowWidth:0,
-            linkStyle:"nav-a font-weight-bolder nav-link p-3",
-            navStyle:"favicon navbar-brand p-3"
+            linkStyle:"nav-a font-weight-bolder nav-link py-3",
+            navStyle:"favicon navbar-brand py-3"
         }
     };
     componentDidMount() {
-        window.addEventListener('scroll', this.handleScroll, { passive: true })
+        window.addEventListener('scroll', this.handleScroll, { passive: true });
         window.addEventListener("resize", this.handleResize);
     }
     handleResize = ()=>{
-        if(this.state.windowWidth!==0 ){
-            this.setState({left: this.state.left + ((window.innerWidth - this.state.windowWidth)/1.898)})
-        }
         this.setState({
-            windowWidth : window.innerWidth
-        });
-        console.log(this.state.windowWidth);
+            left: this.state.activeElement.getBoundingClientRect().left,
+        })
     };
     handleScroll  = () => {
-        if(window.scrollY<10){
+        if(window.scrollY<200){
             this.setState({
-                linkStyle:"nav-a font-weight-bolder nav-link p-3",
-                navStyle:"favicon navbar-brand p-3"
+                linkStyle:"nav-a font-weight-bolder nav-link py-3",
+                navStyle:"favicon navbar-brand py-3"
             })
         }else{
             this.setState({
-                linkStyle:"nav-a font-weight-bolder nav-link px-3",
-                navStyle:"favicon navbar-brand px-3"
+                linkStyle:"nav-a font-weight-bolder nav-link",
+                navStyle:"favicon navbar-brand "
             })
         }
     };
@@ -83,8 +78,7 @@ export default class Header extends Component {
         if (e.target.className.trim().split(" ")[0] === "nav-a"){
             this.setState({
                 left: parentUl.getBoundingClientRect().left ,
-                width:e.target.offsetWidth,
-                // ulStyle: "LoadContent animation dropdown-menu vw-100 "
+                width:parentUl.getBoundingClientRect().width,
             });
         }
     };
@@ -92,31 +86,37 @@ export default class Header extends Component {
         let parentUl = e.target.parentNode;
         if (e.target.className.trim().split(" ")[0] === "nav-a") {
             this.setState({
-                activeLeft: parentUl.getBoundingClientRect().left,
-                activeWidth: e.target.offsetWidth
+                activeWidth: parentUl.getBoundingClientRect().width,
+                activeElement: parentUl
             });
         }
     };
     handleMouseLeave = () =>{
-        this.setState({
-            left: this.state.activeLeft,
-            width: this.state.activeWidth,
-            // ulStyle: "LoadContent animation dropdown-menu vw-100 "
-        })
+        if(this.state.activeElement !== null){
+            this.setState({
+                left: this.state.activeElement.getBoundingClientRect().left,
+                width:this.state.activeElement.getBoundingClientRect().width
+            })
+        }else {
+            this.setState({
+                left:0,
+                width:0
+            })
+        }
     };
 
     render() {
         return (
-            <header className="headerBar fixed-top bg-white" >
+            <header className="headerBar fixed-top bg-white" onLoad={this.handleResize}>
                 <nav className="navbar navbar-light  navbar-expand-lg " style={headerStyle}>
                     <a className={this.state.navStyle} href="/">
                         <img src="assets/img/favicon.png" width="50" height="50" className="d-inline-block align-top" alt="" />
                     </a>
                     <div className="collapse navbar-collapse " id="navbarNav" >
-                        <ul className="navbar-nav navbar-nav-center mx-auto text-uppercase " >
+                        <ul className="navbar-nav navbar-nav-center mx-auto text-uppercase" >
                             <div className="stripe" style={{ left: this.state.left , width: this.state.width }}/>
                             {pages.map((pages) => (
-                                <li className="nav-item  text  position-static"  key={pages.id} onMouseEnter={this.handleMouseEnter} onClick={this.handleMouseClick} onMouseLeave={this.handleMouseLeave} >
+                                <li className="nav-item  text  position-static"  key={pages.id}  onMouseEnter={this.handleMouseEnter} onClick={this.handleMouseClick} onMouseLeave={this.handleMouseLeave} >
                                     <Link className={this.state.linkStyle} id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false" to={pages.link}  >{pages.text}</Link>
                                     <ul className="LoadContent animation dropdown-menu vw-100 " >
                                         <div className="container dropdown-content">
@@ -135,7 +135,10 @@ export default class Header extends Component {
                                 <img src="assets/img/header/searchicon.png" width="30" height="30" className="d-inline-block align-top" alt="" />
                             </button>
                         </form>
-                        <div className="line" >
+                        <div className="hamburger " >
+                            <img src="assets/img/Hamburger.png" width="30" height="30" className="d-inline-block align-top" alt="" />
+                        </div>
+                        <div className="line " >
                             <img src="assets/img/Line.jpg" width="2" height="30" className="d-inline-block align-top" alt="" />
                         </div>
                         <div className="user" >

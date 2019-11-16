@@ -1,5 +1,6 @@
 .favicon{
     margin-left: 10%;
+    transition:  500ms;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
 }
@@ -8,8 +9,13 @@
     height: 100%;
     line-height: 50px;
     text: center !important;
-    transition:  400ms;
-
+    transition:  500ms;
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;
+}
+.hamburger{
+    display: none;
+    opacity: 0;
 }
 .stripe {
     width: 200px;
@@ -17,7 +23,7 @@
     background: blue;
     position: absolute;
     bottom: 0;
-    transition:  0.5s;
+    transition:  400ms ease-in-out;
     pointer-events: none;
 }
 .container{
@@ -62,21 +68,39 @@
     padding: 12px 16px;
     text-decoration: none;
 }
-@media screen and (max-width: 1320px){
-    .navbar-nav{
-        /*display: none !important;*/
-        /*padding-top: 0;*/
-        /*padding-bottom: 0;*/
-        /*width: 40px;*/
-        height: 45px;
-        transition:  0.4s;
-        opacity: 0;
-    }
+@media screen and (max-width: 1344px){
     .favicon{
         margin-left: 3%;
     }
 }
-@media screen and (max-width: 1215px){
+@media screen and (max-width: 1280px){
+
+    .nav-a{
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+}
+@media screen and (max-width: 1118px){
+    .hamburger{
+        display: block;
+        transition:  0.4s;
+        opacity: 100%;
+    }
+    .navbar-nav{
+        height: 45px;
+        transition:  0.4s;
+        opacity: 0;
+    }
+    .search{
+        height: 45px;
+        transition:  0.4s;
+        opacity: 0;
+    }
+}
+@media screen and (max-width: 1115px){
+    .search{
+        display: none
+    }
     .navbar-nav {
         display: none !important;
     }
