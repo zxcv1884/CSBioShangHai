@@ -8,13 +8,11 @@
     display: inline-block !important;
     height: 100%;
     line-height: 50px;
-    text: center !important;
     transition:  500ms;
     padding-right: 1rem !important;
     padding-left: 1rem !important;
 }
 .hamburger{
-    display: none;
     opacity: 0;
 }
 .stripe {
@@ -29,12 +27,8 @@
 .container{
     padding-top: 66px;
 }
-.collapse{
-    z-index: 3;
-}
 .LoadContent {
-    opacity: 0;
-    z-index: 2;
+    opacity: 1;
     display: block ;
     margin-top: 0 !important;
 }
@@ -84,7 +78,21 @@
         width: 300px !important;
     }
 }
-@media screen and (max-width: 1118px){
+@media screen and (max-width: 1146px){
+    .search{
+        display: none !important;
+    }
+    .searchTextBox{
+        opacity: 0;
+        display: none !important;
+    }
+    .searchBtn{
+        opacity: 0;
+        display: none !important;
+    }
+    .navbar-nav {
+        display: none !important;
+    }
     .favicon{
         position: absolute;
         padding-top: 1rem;
@@ -99,25 +107,19 @@
         padding-left: 1rem;
         display: block;
         transition:  400ms;
-        opacity: 100%;
+        opacity: 1 !important;
     }
-    .navbar-nav{
-        height: 45px;
-        transition:  400ms;
-        opacity: 0;
+    .hamburgerBtn{
+        background-color: Transparent;
+        background-repeat:no-repeat;
+        border: none;
+        cursor:pointer;
+        overflow: hidden;
+        outline:none;
+        display: block !important;
     }
-    .search{
-        height: 45px;
-        transition:  300ms;
-        opacity: 0;
-    }
-}
-@media screen and (max-width: 1115px){
-    .search{
-        display: none
-    }
-    .navbar-nav {
-        display: none !important;
+    .hamburgerBtn:focus{
+        outline:none;
     }
 }
 
@@ -150,4 +152,10 @@
     position: static;
     height: 300px;
     width: 500px;
+}
+.hamburgerBtn{
+    display: none;
+}
+.faviconPic{
+    transition:  400ms;
 }
