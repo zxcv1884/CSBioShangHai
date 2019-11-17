@@ -2,84 +2,89 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 const pages = [
-    // {
-    //     id:1,
-    //     text:'Home',
-    //     link:'/',
-    // },
     {
-        id:2,
         text:'peptides',
-        link:'/Second',
+        link:'/Peptides',
     },
     {
-        id:3,
         text:'Instrumentation',
-        link:'/Second',
+        link:'/Instrumentation',
     },
     {
-        id:4,
         text:'OnlineShop',
-        link:'/Second',
+        link:'/OnlineShop',
     },
     {
-        id:5,
         text:'About',
-        link:'/Second',
+        link:'/About',
     },
     {
-        id:6,
         text:'Peptide NoteBook',
-        link:'/Second',
+        link:'/PeptideNoteBook',
     },
 ];
-const headerStyle ={
-    paddingTop : 0,
-    paddingBottom :0,
-};
-
 
 export default class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            faviconHeight: 60,
-            faviconWidth:60,
             activeElement:null,
+            faviconHeight: 60,
+            faviconWidth: 60,
             left: 550,
             width:0,
-            linkStyle:"nav-a font-weight-bolder nav-link py-3",
-            navStyle:"favicon navbar-brand py-3",
-            hamburgerStyle:"hamburger py-4"
+            linkStyle:"nav-a font-weight-bolder nav-link py-2",
+            navStyle:"favicon navbar-brand py-2",
+            hamburgerStyle:"hamburger py-3"
         }
     };
+
     componentDidMount() {
         window.addEventListener('scroll', this.handleScroll, { passive: true });
         window.addEventListener("resize", this.handleResize);
+        this.initStripe();
     }
+
+    initStripe = () =>{
+        let object = this.refs[pages.findIndex(element => element.link === '/'+(window.location.href.split('/'))[3])];
+        if(object !== undefined ){
+            this.setState({
+                activeElement: object,
+                left: object.getBoundingClientRect().left,
+                width: object.getBoundingClientRect().width,
+            });
+        }
+    };
     handleResize = ()=>{
         if(this.state.activeElement !== null) {
             this.setState({
                 left: this.state.activeElement.getBoundingClientRect().left,
+                width: this.state.activeElement.getBoundingClientRect().width,
             })
         }
     };
     handleScroll  = () => {
+        if(this.state.activeElement !== null) {
+            this.setState({
+                left: this.state.activeElement.getBoundingClientRect().left,
+                width: this.state.activeElement.getBoundingClientRect().width,
+            })
+        }
         if(window.scrollY < 70){
             this.setState({
                 faviconHeight: 60,
-                faviconWidth:60,
-                linkStyle:"nav-a font-weight-bolder nav-link py-3",
-                navStyle:"favicon py-3",
-                hamburgerStyle:"hamburger py-4"
+                faviconWidth: 60,
+                linkStyle: "nav-a font-weight-bolder nav-link py-2",
+                navStyle: "favicon py-2",
+                hamburgerStyle: "hamburger py-3"
             })
         }else{
             this.setState({
                 faviconHeight: 50,
-                faviconWidth:50,
-                linkStyle:"nav-a font-weight-bolder nav-link",
-                navStyle:"favicon",
-                hamburgerStyle:"hamburger py-3"
+                faviconWidth: 50,
+                linkStyle: "nav-a font-weight-bolder nav-link",
+                navStyle: "favicon",
+                hamburgerStyle: "hamburger py-2"
             })
         }
     };
@@ -93,15 +98,14 @@ export default class Header extends Component {
         }
     };
     handleMouseClick = (e)=>{
+        let object = this.refs[e.target.id];
         if (e.target.className.trim().split(" ")[0] === "nav-a") {
-            let parentUl = e.target.parentNode;
             this.setState({
-                activeElement: parentUl
+                activeElement: object,
             });
         }else if(e.target.parentNode.className.trim().split(" ")[0] === "dropdownContentTitle"){
-            let parentUl = e.target.parentNode.parentNode.parentNode.parentNode;
             this.setState({
-                activeElement: parentUl
+                activeElement: object,
             });
         }
     };
@@ -118,11 +122,20 @@ export default class Header extends Component {
             })
         }
     };
-
+    handleHeaderEnter = () => {
+        this.setState({
+            faviconHeight: 60,
+            faviconWidth: 60,
+            linkStyle: "nav-a font-weight-bolder nav-link py-2",
+            navStyle: "favicon py-2",
+            hamburgerStyle: "hamburger py-3"
+        });
+        console.log('hey')
+    };
     render() {
         return (
             <header className="headerBar fixed-top bg-white" onLoad={this.handleResize} >
-                <nav className="navbar navbar-light  navbar-expand-lg " style={headerStyle}>
+                <nav className="navbarStyle navbar navbar-light navbar-expand-lg" onMouseEnter={this.handleHeaderEnter}>
                     <div className={this.state.hamburgerStyle} >
                         <button className="hamburgerBtn">
                         <img src="assets/img/Hamburger.png" width="30" height="30" className="d-inline-block align-top" alt="" />
@@ -134,13 +147,13 @@ export default class Header extends Component {
                     <div className="collapse navbar-collapse " id="navbarNav" >
                         <ul className="navbar-nav navbar-nav-center mx-auto text-uppercase" >
                             <div className="stripe" style={{ left: this.state.left , width: this.state.width }} />
-                            {pages.map((pages) => (
-                                <li className="nav-item text position-static"  key={pages.id}  onMouseEnter={this.handleMouseEnter} onClick={this.handleMouseClick} onMouseLeave={this.handleMouseLeave} >
-                                    <Link className={this.state.linkStyle} id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false" to={pages.link}  >{pages.text}</Link>
+                            {pages.map((pages,index) => (
+                                <li className="nav-item text position-static" ref={index} key={index} onMouseEnter={this.handleMouseEnter} onClick={this.handleMouseClick} onMouseLeave={this.handleMouseLeave} >
+                                    <Link className={this.state.linkStyle} id={index} role="button" aria-haspopup="true" aria-expanded="false" to={pages.link}  >{pages.text}</Link>
                                     <ul className="LoadContent animation dropdown-menu vw-100 " >
                                         <div className="form-inline">
                                             <div className="dropdownContentTitle dropdown-content ">
-                                                <Link to={pages.link} onMouseEnter={this.handleMouseEnter}>{pages.text}</Link>
+                                                <Link to={pages.link} id={index}>{pages.text}</Link>
                                             </div>
 
                                         </div>
@@ -160,9 +173,9 @@ export default class Header extends Component {
                         <div className="line " >
                             <img src="assets/img/Line.jpg" width="2" height="30" className="d-inline-block align-top" alt="" />
                         </div>
-                        <div className="user" >
+                        <button className="user" >
                             <img src="assets/img/user.svg" width="30" height="30" className="d-inline-block align-top" alt="" />
-                        </div>
+                        </button>
                     </div>
                 </nav>
             </header>

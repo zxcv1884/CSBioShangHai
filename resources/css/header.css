@@ -128,8 +128,12 @@
     min-height: 45px;
 }
 .searchTextBox{
-    max-width: 180px;
-    max-height: 37px;
+     max-width: 180px;
+     max-height: 37px;
+     box-shadow:none !important;
+ }
+.searchBtn{
+    box-shadow:none !important;
 }
 .line{
     padding-left: 1rem;
@@ -158,4 +162,28 @@
 }
 .faviconPic{
     transition:  400ms;
+}
+.user{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    display: block !important;
+}
+.user:focus{
+    outline:none;
+}
+.navbarStyle{
+    padding-top : 0 !important;
+    padding-bottom :0 !important;
+}
+root {
+    background-color: #fff;
+    color: #636b6f;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+    height: 100%;
+    margin: 0;
 }

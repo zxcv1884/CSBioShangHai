@@ -14,6 +14,21 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/Peptides', function () {
+    return view('welcome');
+});
+Route::get('/Instrumentation', function () {
+    return view('welcome');
+});
+Route::get('/OnlineShop', function () {
+    return view('welcome');
+});
+Route::get('/About', function () {
+    return view('welcome');
+});
+Route::get('/PeptideNoteBook', function () {
+    return view('welcome');
+});
 
 Auth::routes();
 

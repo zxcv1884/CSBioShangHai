@@ -5,16 +5,25 @@ import { BrowserRouter, NavLink } from "react-router-dom";
 import ReactDOM from "react-dom";
 import Header from "./components/Header";
 import Home from "./components/Home";
-import Second from "./components/Second";
+import Peptides from "./components/Peptides";
+import Instrumentation from "./components/Instrumentation";
+import OnlineShop from "./components/OnlineShop";
+import About from "./components/About";
+import PeptideNoteBook from "./components/PeptideNoteBook";
+
 import '../css/header.css';
 export default class App extends Component {
     render() {
         return (
             <BrowserRouter>
-                    <Header/>
-                    <div className="headerSpace"/>
-                    <Route exact path="/" component={Home}></Route>
-                    <Route path="/second" component={Second}></Route>
+                <Header/>
+                <div className="headerSpace"/>
+                <Route exact path="/" component={Home}></Route>
+                <Route path="/peptides" component={Peptides}></Route>
+                <Route path="/instrumentation" component={Instrumentation}></Route>
+                <Route path="/onlineShop" component={OnlineShop}></Route>
+                <Route path="/about" component={About}></Route>
+                <Route path="/peptideNoteBook" component={PeptideNoteBook}></Route>
             </BrowserRouter>
         );
     }
